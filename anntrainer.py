@@ -52,7 +52,6 @@ class BackPropagationNetwork:
 		for index in reversed(range(self.layerCount)):
 
 			if index == self.layerCount - 1 :
-
 				output_delta = self._layerOutput[index] - target.T
 				error = np.sum(output_delta**2)
 				delta.append(output_delta * self.sgm(self._layerInput[index],True))
@@ -90,37 +89,40 @@ class BackPropagationNetwork:
 
 
 if __name__ == "__main__":
-	bpn = BackPropagationNetwork((260,25,25,5))
+	bpn = BackPropagationNetwork((260,25,25,6))
 	
 
-	f1 = open("mfccData/apple_mfcc.npy")
-	f2 = open("mfccData/banana_mfcc.npy")
-	f3 = open("mfccData/kiwi_mfcc.npy")
-	f4 = open("mfccData/lime_mfcc.npy")
-	f5 = open("mfccData/orange_mfcc.npy")
-	
-	inputArray1  = np.load(f1)
-	inputArray2  = np.load(f2)
-	inputArray3  = np.load(f3)
-	inputArray4  = np.load(f4)
-	inputArray5  = np.load(f5)
-	inputArray = np.concatenate((inputArray1,inputArray2,inputArray3,inputArray4,inputArray5))
+	f1 = open("mfccData/apple_mfcc.npy", "rb")
+	f2 = open("mfccData/banana_mfcc.npy", "rb")
+	f3 = open("mfccData/kiwi_mfcc.npy", "rb")
+	f4 = open("mfccData/lime_mfcc.npy", "rb")
+	f5 = open("mfccData/orange_mfcc.npy", "rb")
+	f6 = open("mfccData/alo_mfcc.npy", "rb")
+
+	inputArray1  = np.load(f1, allow_pickle=True, encoding="latin1")
+	inputArray2  = np.load(f2, allow_pickle=True, encoding="latin1")
+	inputArray3  = np.load(f3, allow_pickle=True, encoding="latin1")
+	inputArray4  = np.load(f4, allow_pickle=True, encoding="latin1")
+	inputArray5  = np.load(f5, allow_pickle=True, encoding="latin1")
+	inputArray6  = np.load(f6, allow_pickle=True, encoding="latin1")
+	inputArray = np.concatenate((inputArray1,inputArray2,inputArray3,inputArray4,inputArray5,inputArray6))
 
 	print(inputArray.shape)
 
-	t1 = np.array([[1,0,0,0,0] for _ in range(len(inputArray1))])
-	t2 = np.array([[0,1,0,0,0] for _ in range(len(inputArray2))])
-	t3 = np.array([[0,0,1,0,0] for _ in range(len(inputArray3))])
-	t4 = np.array([[0,0,0,1,0] for _ in range(len(inputArray4))])
-	t5 = np.array([[0,0,0,0,1] for _ in range(len(inputArray5))])
+	t1 = np.array([[1,0,0,0,0,0] for _ in range(len(inputArray1))])
+	t2 = np.array([[0,1,0,0,0,0] for _ in range(len(inputArray2))])
+	t3 = np.array([[0,0,1,0,0,0] for _ in range(len(inputArray3))])
+	t4 = np.array([[0,0,0,1,0,0] for _ in range(len(inputArray4))])
+	t5 = np.array([[0,0,0,0,1,0] for _ in range(len(inputArray5))])
+	t6 = np.array([[0,0,0,0,0,1] for _ in range(len(inputArray6))])
 
-	target = np.concatenate([t1,t2,t3,t4,t5])
+	target = np.concatenate([t1,t2,t3,t4,t5,t6])
 	print(target.shape)
 
 	lnMax = 1000000
 	lnErr = 1e-5
 
-	startTime = time.clock()
+	startTime = time.time()
 
 	#Train Loop
 	for i in range(lnMax-1):
@@ -131,7 +133,7 @@ if __name__ == "__main__":
 			print("Minimum error reached at iteration {0}".format(i))
 			break
 
-	endTime = time.clock()
+	endTime = time.time()
 
 	with open("network/" + "vowel_network_words"+ ".npy", 'w') as outfile:
   		np.save(outfile,bpn.weights)

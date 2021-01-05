@@ -4,7 +4,7 @@ from operator import add
 import scipy.io.wavfile as wav
 import numpy as np
 
-words = ['apple','banana','kiwi','lime','orange']
+words = ['apple','banana','kiwi','lime','orange','alo']
 
 
 for x in range(len(words)):
@@ -24,7 +24,7 @@ for x in range(len(words)):
 		data.append(st)
 		print(st)
 		
-	with open("mfccData/" + fileString+ ".npy", 'w') as outfile:
+	with open("mfccData/" + fileString+ ".npy", 'wb') as outfile:
    		np.save(outfile,data)
 
 

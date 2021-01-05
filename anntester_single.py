@@ -92,6 +92,8 @@ def feedToNetwork(inputArray,testNet):
 		outStr  = "Detected: Lime";
 	elif indexMax==4:
 		outStr  = "Detected: Orange";
+	elif indexMax==5:
+		outStr  = "Detected: Alo";
 
 	print (outStr)
 	return outStr
