@@ -119,7 +119,7 @@ if __name__ == "__main__":
 	target = np.concatenate([t1,t2,t3,t4,t5,t6])
 	print(target.shape)
 
-	lnMax = 1000000
+	lnMax = 100000
 	lnErr = 1e-5
 
 	startTime = time.time()
@@ -127,6 +127,7 @@ if __name__ == "__main__":
 	#Train Loop
 	for i in range(lnMax-1):
 		err = bpn.train(inputArray,target,momentum = 0.3)
+		print("Iteration {0} \tError: {1:0.6f}".format(i,err))
 		if i % 1500 == 0:
 			print("Iteration {0} \tError: {1:0.6f}".format(i,err))
 		if err <= lnErr:
@@ -135,7 +136,7 @@ if __name__ == "__main__":
 
 	endTime = time.time()
 
-	with open("network/" + "vowel_network_words"+ ".npy", 'w') as outfile:
+	with open("network/" + "vowel_network_words"+ ".npy", 'wb') as outfile:
   		np.save(outfile,bpn.weights)
 
   	
