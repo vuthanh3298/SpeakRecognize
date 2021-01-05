@@ -48,7 +48,7 @@ class TestingNetwork:
 def testInit():
 	#Setup Neural Network
 	f1 = open("network/vowel_network_words.npy", "rb")
-	weights  = np.load(f1)
+	weights  = np.load(f1, allow_pickle=True, encoding="latin1")
 	testNet = TestingNetwork((260,25,25,5),weights)
 	return testNet
 
@@ -57,7 +57,7 @@ def extractFeature(soundfile):
 	(rate,sig) = wav.read(soundfile)
 	duration = len(sig)/rate;	
 	mfcc_feat = mfcc(sig,rate,winlen=duration/20,winstep=duration/20)
-	print "MFCC Feature Length: " + str(len(mfcc_feat))
+	print("MFCC Feature Length: " + str(len(mfcc_feat)))
 	s = mfcc_feat[:20]
 	st = []
 	for elem in s:
@@ -77,7 +77,7 @@ def feedToNetwork(inputArray,testNet):
 
 	indexMax = outputArray.argmax(axis = 1)[0]
 			
-	print outputArray
+	print(outputArray)
 	
 	#Mapping each index to their corresponding meaning
 	outStr = None
@@ -93,7 +93,7 @@ def feedToNetwork(inputArray,testNet):
 	elif indexMax==4:
 		outStr  = "Detected: Orange";
 
-	print outStr
+	print (outStr)
 	return outStr
 
 if __name__ == "__main__":

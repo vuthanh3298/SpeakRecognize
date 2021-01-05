@@ -106,7 +106,7 @@ if __name__ == "__main__":
 	inputArray5  = np.load(f5)
 	inputArray = np.concatenate((inputArray1,inputArray2,inputArray3,inputArray4,inputArray5))
 
-	print inputArray.shape
+	print(inputArray.shape)
 
 	t1 = np.array([[1,0,0,0,0] for _ in range(len(inputArray1))])
 	t2 = np.array([[0,1,0,0,0] for _ in range(len(inputArray2))])
@@ -115,7 +115,7 @@ if __name__ == "__main__":
 	t5 = np.array([[0,0,0,0,1] for _ in range(len(inputArray5))])
 
 	target = np.concatenate([t1,t2,t3,t4,t5])
-	print target.shape	
+	print(target.shape)
 
 	lnMax = 1000000
 	lnErr = 1e-5
@@ -126,7 +126,7 @@ if __name__ == "__main__":
 	for i in range(lnMax-1):
 		err = bpn.train(inputArray,target,momentum = 0.3)
 		if i % 1500 == 0:
-			print "Iteration {0} \tError: {1:0.6f}".format(i,err)
+			print("Iteration {0} \tError: {1:0.6f}".format(i,err))
 		if err <= lnErr:
 			print("Minimum error reached at iteration {0}".format(i))
 			break
@@ -141,6 +141,6 @@ if __name__ == "__main__":
 	lvOutput = bpn.forwardProc(inputArray)
 	print("Output {0}".format(lvOutput))
 
-	print "Time Elapsed: " + str(endTime - startTime) + " seconds"
-	print "Total Iteration {0} \t Total Error: {1:0.6f}".format(i,err)
+	print("Time Elapsed: " + str(endTime - startTime) + " seconds")
+	print("Total Iteration {0} \t Total Error: {1:0.6f}".format(i,err))
 	

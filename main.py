@@ -1,4 +1,4 @@
-from Tkinter import *
+from tkinter import *
 from threading import Thread
 from record import record_to_file
 from features import mfcc
@@ -43,7 +43,7 @@ def record_and_test(textbox, button, filename="test_files/test.wav"):
     # Feed into ANN
     testNet = testInit()
     inputArray = extractFeature(filename)
-    print len(inputArray)
+    print(len(inputArray))
     outStr = feedToNetwork(inputArray,testNet)
 
     # Change text and re-enable button
