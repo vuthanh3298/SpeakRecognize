@@ -119,7 +119,7 @@ if __name__ == "__main__":
 	target = np.concatenate([t1,t2,t3,t4,t5,t6])
 	print(target.shape)
 
-	lnMax = 100000
+	lnMax = 1000000
 	lnErr = 1e-5
 
 	startTime = time.time()
@@ -127,8 +127,8 @@ if __name__ == "__main__":
 	#Train Loop
 	for i in range(lnMax-1):
 		err = bpn.train(inputArray,target,momentum = 0.3)
-		print("Iteration {0} \tError: {1:0.6f}".format(i,err))
-		if i % 1500 == 0:
+		# print("Iteration {0} \tError: {1:0.6f}".format(i,err))
+		if i % 1000 == 0:
 			print("Iteration {0} \tError: {1:0.6f}".format(i,err))
 		if err <= lnErr:
 			print("Minimum error reached at iteration {0}".format(i))

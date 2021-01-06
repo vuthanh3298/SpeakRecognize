@@ -12,7 +12,7 @@ for x in range(len(words)):
 	data = []
 	for i in range(10):
 		(rate,sig) = wav.read("training_sets/"+ words[x] + "-" + str(i+1) + ".wav")
-		#print Reading: " + words[x] + "-" + str(i+1) + ".wav"
+		print ("Reading: " + words[x] + "-" + str(i+1) + ".wav")
 		duration = len(sig)/rate
 		mfcc_feat = mfcc(sig,rate,winlen=duration/20,winstep=duration/20)
 		s = mfcc_feat[:20]

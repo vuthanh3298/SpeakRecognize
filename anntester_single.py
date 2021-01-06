@@ -49,7 +49,10 @@ def testInit():
 	#Setup Neural Network
 	f1 = open("network/vowel_network_words.npy", "rb")
 	weights  = np.load(f1, allow_pickle=True, encoding="latin1")
-	testNet = TestingNetwork((260,25,25,5),weights)
+	print("weights: \n")
+	print(weights.shape)
+	print(weights)
+	testNet = TestingNetwork((260,25,25,6),weights)
 	return testNet
 
 def extractFeature(soundfile):
