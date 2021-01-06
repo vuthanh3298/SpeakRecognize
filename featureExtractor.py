@@ -4,13 +4,13 @@ from operator import add
 import scipy.io.wavfile as wav
 import numpy as np
 
-words = ['aloo', 'batdenbancong']
+words = ['aloo', 'batdenbancong', 'batquatphongngu']
 
 
 for x in range(len(words)):
 	fileString = words[x]+"_mfcc"
 	data = []
-	for i in range(10):
+	for i in range(20):
 		(rate,sig) = wav.read("training_sets/"+ words[x] + "-" + str(i+1) + ".wav")
 		print ("Reading: " + words[x] + "-" + str(i+1) + ".wav")
 		duration = len(sig)/rate

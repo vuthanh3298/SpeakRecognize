@@ -52,7 +52,7 @@ def testInit():
 	print("weights: \n")
 	print(weights.shape)
 	print(weights)
-	testNet = TestingNetwork((260,25,25,2),weights)
+	testNet = TestingNetwork((260,25,25,3),weights)
 	return testNet
 
 def extractFeature(soundfile):
@@ -99,14 +99,4 @@ if __name__ == "__main__":
 	# inputArray = extractFeature("training_sets/alo-test.wav")
 	inputArray = extractFeature("test_files/test.wav")
 	feedToNetwork(inputArray,testNet)
-
-
-
-
-	
-
-
-	
-		
-
 

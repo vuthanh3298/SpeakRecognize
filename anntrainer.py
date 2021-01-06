@@ -89,25 +89,28 @@ class BackPropagationNetwork:
 
 
 if __name__ == "__main__":
-	bpn = BackPropagationNetwork((260,25,25,2))
+	bpn = BackPropagationNetwork((260,25,25,3))
 	
 
 	f1 = open("mfccData/aloo_mfcc.npy", "rb")
 	f2 = open("mfccData/batdenbancong_mfcc.npy", "rb")
+	f3 = open("mfccData/batquatphongngu_mfcc.npy", "rb")
 
-	inputArray1  = np.load(f1, allow_pickle=True, encoding="latin1")
-	inputArray2  = np.load(f2, allow_pickle=True, encoding="latin1")
-	inputArray = np.concatenate((inputArray1,inputArray2))
+	inputArray1  = np.load(f1, allow_pickle=True, encoding="bytes")
+	inputArray2  = np.load(f2, allow_pickle=True, encoding="bytes")
+	inputArray3  = np.load(f3, allow_pickle=True, encoding="bytes")
+	inputArray = np.concatenate((inputArray1,inputArray2, inputArray3))
 
 	print(inputArray.shape)
 
-	t1 = np.array([[1,0] for _ in range(len(inputArray1))])
-	t2 = np.array([[0,1] for _ in range(len(inputArray2))])
+	t1 = np.array([[1,0,0] for _ in range(len(inputArray1))])
+	t2 = np.array([[0,1,0] for _ in range(len(inputArray2))])
+	t3 = np.array([[0,0,1] for _ in range(len(inputArray3))])
 
-	target = np.concatenate([t1,t2])
+	target = np.concatenate([t1,t2,t3])
 	print(target.shape)
 
-	lnMax = 1000000
+	lnMax = 10000000
 	lnErr = 1e-5
 
 	startTime = time.time()
