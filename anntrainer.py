@@ -89,34 +89,22 @@ class BackPropagationNetwork:
 
 
 if __name__ == "__main__":
-	bpn = BackPropagationNetwork((260,25,25,6))
+	bpn = BackPropagationNetwork((260,25,25,2))
 	
 
-	f1 = open("mfccData/apple_mfcc.npy", "rb")
-	f2 = open("mfccData/banana_mfcc.npy", "rb")
-	f3 = open("mfccData/kiwi_mfcc.npy", "rb")
-	f4 = open("mfccData/lime_mfcc.npy", "rb")
-	f5 = open("mfccData/orange_mfcc.npy", "rb")
-	f6 = open("mfccData/alo_mfcc.npy", "rb")
+	f1 = open("mfccData/aloo_mfcc.npy", "rb")
+	f2 = open("mfccData/batdenbancong_mfcc.npy", "rb")
 
 	inputArray1  = np.load(f1, allow_pickle=True, encoding="latin1")
 	inputArray2  = np.load(f2, allow_pickle=True, encoding="latin1")
-	inputArray3  = np.load(f3, allow_pickle=True, encoding="latin1")
-	inputArray4  = np.load(f4, allow_pickle=True, encoding="latin1")
-	inputArray5  = np.load(f5, allow_pickle=True, encoding="latin1")
-	inputArray6  = np.load(f6, allow_pickle=True, encoding="latin1")
-	inputArray = np.concatenate((inputArray1,inputArray2,inputArray3,inputArray4,inputArray5,inputArray6))
+	inputArray = np.concatenate((inputArray1,inputArray2))
 
 	print(inputArray.shape)
 
-	t1 = np.array([[1,0,0,0,0,0] for _ in range(len(inputArray1))])
-	t2 = np.array([[0,1,0,0,0,0] for _ in range(len(inputArray2))])
-	t3 = np.array([[0,0,1,0,0,0] for _ in range(len(inputArray3))])
-	t4 = np.array([[0,0,0,1,0,0] for _ in range(len(inputArray4))])
-	t5 = np.array([[0,0,0,0,1,0] for _ in range(len(inputArray5))])
-	t6 = np.array([[0,0,0,0,0,1] for _ in range(len(inputArray6))])
+	t1 = np.array([[1,0] for _ in range(len(inputArray1))])
+	t2 = np.array([[0,1] for _ in range(len(inputArray2))])
 
-	target = np.concatenate([t1,t2,t3,t4,t5,t6])
+	target = np.concatenate([t1,t2])
 	print(target.shape)
 
 	lnMax = 1000000

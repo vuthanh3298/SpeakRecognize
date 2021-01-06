@@ -4,7 +4,7 @@ from operator import add
 import scipy.io.wavfile as wav
 import numpy as np
 
-words = ['apple','banana','kiwi','lime','orange','alo']
+words = ['aloo', 'batdenbancong']
 
 
 for x in range(len(words)):

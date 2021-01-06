@@ -52,7 +52,7 @@ def testInit():
 	print("weights: \n")
 	print(weights.shape)
 	print(weights)
-	testNet = TestingNetwork((260,25,25,6),weights)
+	testNet = TestingNetwork((260,25,25,2),weights)
 	return testNet
 
 def extractFeature(soundfile):
@@ -86,17 +86,9 @@ def feedToNetwork(inputArray,testNet):
 	outStr = None
 	
 	if indexMax == 0:
-		outStr  = "Detected: Apple"; 
+		outStr  = "Detected: Aloo"; 
 	elif indexMax==1:
-		outStr  = "Detected: Banana";
-	elif indexMax==2:
-		outStr  = "Detected: Kiwi";
-	elif indexMax==3:
-		outStr  = "Detected: Lime";
-	elif indexMax==4:
-		outStr  = "Detected: Orange";
-	elif indexMax==5:
-		outStr  = "Detected: Alo";
+		outStr  = "Detected: Bat den ban cong";
 
 	print (outStr)
 	return outStr
@@ -104,6 +96,7 @@ def feedToNetwork(inputArray,testNet):
 if __name__ == "__main__":
 
 	testNet = testInit()
+	# inputArray = extractFeature("training_sets/alo-test.wav")
 	inputArray = extractFeature("test_files/test.wav")
 	feedToNetwork(inputArray,testNet)
 
