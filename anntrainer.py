@@ -89,25 +89,32 @@ class BackPropagationNetwork:
 
 
 if __name__ == "__main__":
-	bpn = BackPropagationNetwork((260,25,25,3))
+	bpn = BackPropagationNetwork((260,25,25,5))
 	
 
-	f1 = open("mfccData/aloo_mfcc.npy", "rb")
-	f2 = open("mfccData/batdenbancong_mfcc.npy", "rb")
-	f3 = open("mfccData/batquatphongngu_mfcc.npy", "rb")
+	f1 = open("mfccData/alo_mfcc.npy", "rb")
+	f2 = open("mfccData/batden_mfcc.npy", "rb")
+	f3 = open("mfccData/batquat_mfcc.npy", "rb")
+	f4 = open("mfccData/tatden_mfcc.npy", "rb")
+	f5 = open("mfccData/tatquat_mfcc.npy", "rb")
 
-	inputArray1  = np.load(f1, allow_pickle=True, encoding="bytes")
-	inputArray2  = np.load(f2, allow_pickle=True, encoding="bytes")
-	inputArray3  = np.load(f3, allow_pickle=True, encoding="bytes")
-	inputArray = np.concatenate((inputArray1,inputArray2, inputArray3))
+	inputArray1 = np.load(f1, allow_pickle=True, encoding="bytes")
+	inputArray2 = np.load(f2, allow_pickle=True, encoding="bytes")
+	inputArray3 = np.load(f3, allow_pickle=True, encoding="bytes")
+	inputArray4 = np.load(f4, allow_pickle=True, encoding="bytes")
+	inputArray5 = np.load(f5, allow_pickle=True, encoding="bytes")
+
+	inputArray = np.concatenate((inputArray1,inputArray2,inputArray3,inputArray4,inputArray5))
 
 	print(inputArray.shape)
 
-	t1 = np.array([[1,0,0] for _ in range(len(inputArray1))])
-	t2 = np.array([[0,1,0] for _ in range(len(inputArray2))])
-	t3 = np.array([[0,0,1] for _ in range(len(inputArray3))])
+	t1 = np.array([[1,0,0,0,0] for _ in range(len(inputArray1))])
+	t2 = np.array([[0,1,0,0,0] for _ in range(len(inputArray2))])
+	t3 = np.array([[0,0,1,0,0] for _ in range(len(inputArray3))])
+	t4 = np.array([[0,0,0,1,0] for _ in range(len(inputArray4))])
+	t5 = np.array([[0,0,0,0,1] for _ in range(len(inputArray5))])
 
-	target = np.concatenate([t1,t2,t3])
+	target = np.concatenate([t1,t2,t3,t4,t5])
 	print(target.shape)
 
 	lnMax = 10000000

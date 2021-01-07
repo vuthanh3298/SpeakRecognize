@@ -86,9 +86,11 @@ def feedToNetwork(inputArray,testNet):
 	outStr = None
 	
 	if indexMax == 0:
-		outStr  = "Detected: Aloo"; 
+		outStr  = "Detected: Alo"; 
 	elif indexMax==1:
 		outStr  = "Detected: Bat den ban cong";
+	elif indexMax==2:
+		outStr  = "Detected: Bat quat phong ngu";
 
 	print (outStr)
 	return outStr
