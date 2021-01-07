@@ -117,7 +117,7 @@ if __name__ == "__main__":
 	target = np.concatenate([t1,t2,t3,t4,t5])
 	print(target.shape)
 
-	lnMax = 10000000
+	lnMax = 5000000
 	lnErr = 1e-5
 
 	startTime = time.time()
@@ -134,7 +134,7 @@ if __name__ == "__main__":
 
 	endTime = time.time()
 
-	with open("network/" + "vowel_network_words"+ ".npy", 'wb') as outfile:
+	with open("network/" + "vowel_network_words_10"+ ".npy", 'wb') as outfile:
   		np.save(outfile,bpn.weights)
 
   	

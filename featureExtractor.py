@@ -10,7 +10,7 @@ words = ['alo', 'batden', 'tatden', 'batquat', 'tatquat']
 for x in range(len(words)):
 	fileString = words[x]+"_mfcc"
 	data = []
-	for i in range(20):
+	for i in range(10):
 		(rate,sig) = wav.read("training_sets/"+ words[x] + "-" + str(i+1) + ".wav")
 		print ("Reading: " + words[x] + "-" + str(i+1) + ".wav")
 		duration = len(sig)/rate

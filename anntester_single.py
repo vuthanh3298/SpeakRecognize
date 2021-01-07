@@ -47,12 +47,12 @@ class TestingNetwork:
 
 def testInit():
 	#Setup Neural Network
-	f1 = open("network/vowel_network_words.npy", "rb")
+	f1 = open("network/vowel_network_words_10.npy", "rb")
 	weights  = np.load(f1, allow_pickle=True, encoding="latin1")
-	print("weights: \n")
-	print(weights.shape)
-	print(weights)
-	testNet = TestingNetwork((260,25,25,3),weights)
+	# print("weights: \n")
+	# print(weights.shape)
+	# print(weights)
+	testNet = TestingNetwork((260,25,25,5),weights)
 	return testNet
 
 def extractFeature(soundfile):
@@ -88,9 +88,13 @@ def feedToNetwork(inputArray,testNet):
 	if indexMax == 0:
 		outStr  = "Detected: Alo"; 
 	elif indexMax==1:
-		outStr  = "Detected: Bat den ban cong";
+		outStr  = "Detected: Bat den ";
 	elif indexMax==2:
-		outStr  = "Detected: Bat quat phong ngu";
+		outStr  = "Detected: Bat quat";
+	elif indexMax==3:
+		outStr  = "Detected: Tat den";
+	elif indexMax==4:
+		outStr  = "Detected: Tat quat";
 
 	print (outStr)
 	return outStr
@@ -98,7 +102,7 @@ def feedToNetwork(inputArray,testNet):
 if __name__ == "__main__":
 
 	testNet = testInit()
-	# inputArray = extractFeature("training_sets/alo-test.wav")
+	#inputArray = extractFeature("training_sets/batden-12.wav")
 	inputArray = extractFeature("test_files/test.wav")
 	feedToNetwork(inputArray,testNet)
 
