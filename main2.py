@@ -43,9 +43,12 @@ if __name__ == '__main__':
             plsnd.playsound("speak_out_files/bancangiupgi.wav")
             print("Ban can giup gi? ...")
 
-            filename = "training_sets/batden-1.wav"
+            
 
             record_to_file(filename)
+
+            filename = "training_sets/batden-2.wav"
+
             inputArray = extractFeature(filename)
             res = feedToNetwork(inputArray,testNet)
             if res==1:
