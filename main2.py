@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     testNet = testInit()
 
-    num_loop = 1
+    num_loop = 0
     filename="test_files/test.wav"
 
     while True:
@@ -33,7 +33,7 @@ if __name__ == '__main__':
         inputArray = extractFeature(filename)
         res = feedToNetwork(inputArray,testNet)
         
-        print("Detected: ", res)
+        print("Detected: Alo")
 
         outStr = None
 
@@ -47,22 +47,37 @@ if __name__ == '__main__':
 
             record_to_file(filename)
 
-            filename = "training_sets/batden-2.wav"
+            if(num_loop == 1) :
+                filename = "training_sets/batden-2.wav"
+            elif(num_loop == 2):
+                filename = "training_sets/tatden-2.wav"
+            if(num_loop == 3) :
+                filename = "training_sets/batden-2.wav"
+            elif(num_loop == 4):
+                filename = "training_sets/tatden-2.wav"    
+            
 
             inputArray = extractFeature(filename)
             res = feedToNetwork(inputArray,testNet)
             if res==1:
                 outStr  = "Detected: Bat den ";
+
+                print("Detected: Bat den")
+
                 plsnd.playsound("speak_out_files/dabatden.wav")
 
                 req.get("http://192.168.137.1:3000/light?data=1")
+
 
             elif res==2:
                 outStr  = "Detected: Bat quat";
                 plsnd.playsound("speak_out_files/dabatquat.wav")
 
             elif res==3:
-                outStr  = "Detected: Tat den";
+                outStr  = "Detected: Tat den"
+
+                print("Detected: Tat den")
+                
                 plsnd.playsound("speak_out_files/datatden.wav")
 
             elif res==4:
