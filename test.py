@@ -1,6 +1,5 @@
-import numpy as np 
+import playsound as ps
 
-f1 = open("mfccData/orange_mfcc.npy", "rb")
-inputArray1  = np.load(f1, allow_pickle=True, encoding="latin1")
+ps.playsound('bancangiupgi.mp3')
 
-print(inputArray1)
+print('abc')

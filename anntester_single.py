@@ -79,6 +79,8 @@ def feedToNetwork(inputArray,testNet):
 
 
 	indexMax = outputArray.argmax(axis = 1)[0]
+
+	return indexMax
 			
 	print(outputArray)
 	
@@ -102,7 +104,7 @@ def feedToNetwork(inputArray,testNet):
 if __name__ == "__main__":
 
 	testNet = testInit()
-	#inputArray = extractFeature("training_sets/batden-12.wav")
+	#inputArray = extractFeature("training_sets/batquat-19.wav")
 	inputArray = extractFeature("test_files/test.wav")
 	feedToNetwork(inputArray,testNet)
 
