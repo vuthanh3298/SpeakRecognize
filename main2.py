@@ -19,10 +19,7 @@ if __name__ == '__main__':
     num_loop = 1
     filename="test_files/test.wav"
 
-    plsnd.playsound("speak_out_files/bancangiupgi.wav")
-
-    print("bac")
-
+    #plsnd.playsound("speak_out_files/bancangiupgi.wav")
 
     while True:
         # Record to file
@@ -35,6 +32,8 @@ if __name__ == '__main__':
         inputArray = extractFeature(filename)
         res = feedToNetwork(inputArray,testNet)
         
+        print("Detected: ", res)
+
         outStr = None
 
         if(res == 0):

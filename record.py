@@ -5,7 +5,7 @@ from struct import pack
 import pyaudio
 import wave
 
-THRESHOLD = 1500
+THRESHOLD = 2000
 CHUNK_SIZE = 1024
 FORMAT = pyaudio.paInt16
 RATE = 44100
