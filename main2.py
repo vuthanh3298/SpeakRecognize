@@ -4,6 +4,7 @@ from features import mfcc
 from anntester_single import *
 import scipy.io.wavfile as wav
 import playsound as plsnd
+import requests as req
 
 
 if __name__ == '__main__':
@@ -19,8 +20,6 @@ if __name__ == '__main__':
     num_loop = 1
     filename="test_files/test.wav"
 
-    #plsnd.playsound("speak_out_files/bancangiupgi.wav")
-
     while True:
         # Record to file
         num_loop += 1
@@ -28,6 +27,8 @@ if __name__ == '__main__':
         record_to_file(filename)
 
         # Feed into ANN
+
+        filename = "training_sets/alo-1.wav"
         
         inputArray = extractFeature(filename)
         res = feedToNetwork(inputArray,testNet)
@@ -42,12 +43,16 @@ if __name__ == '__main__':
             plsnd.playsound("speak_out_files/bancangiupgi.wav")
             print("Ban can giup gi? ...")
 
+            filename = "training_sets/batden-1.wav"
+
             record_to_file(filename)
             inputArray = extractFeature(filename)
             res = feedToNetwork(inputArray,testNet)
             if res==1:
                 outStr  = "Detected: Bat den ";
                 plsnd.playsound("speak_out_files/dabatden.wav")
+
+                req.get("http://192.168.137.1:3000/light?data=1")
 
             elif res==2:
                 outStr  = "Detected: Bat quat";
