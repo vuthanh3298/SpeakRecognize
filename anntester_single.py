@@ -49,9 +49,6 @@ def testInit():
 	#Setup Neural Network
 	f1 = open("network/vowel_network_words_10.npy", "rb")
 	weights  = np.load(f1, allow_pickle=True, encoding="latin1")
-	# print("weights: \n")
-	# print(weights.shape)
-	# print(weights)
 	testNet = TestingNetwork((260,25,25,5),weights)
 	return testNet
 
@@ -103,6 +100,7 @@ if __name__ == "__main__":
 
 	testNet = testInit()
 	#inputArray = extractFeature("training_sets/batquat-19.wav")
-	inputArray = extractFeature("test_files/test.wav")
+	#inputArray = extractFeature("test_files/test.wav")
+	inputArray = extractFeature("test_files/alo-dat.wav")
 	feedToNetwork(inputArray,testNet)
 

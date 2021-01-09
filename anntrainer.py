@@ -117,7 +117,7 @@ if __name__ == "__main__":
 	target = np.concatenate([t1,t2,t3,t4,t5])
 	print(target.shape)
 
-	lnMax = 5000000
+	lnMax = 1000000
 	lnErr = 1e-5
 
 	startTime = time.time()
