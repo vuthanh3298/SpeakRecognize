@@ -80,8 +80,6 @@ def feedToNetwork(inputArray,testNet):
 
 	indexMax = outputArray.argmax(axis = 1)[0]
 
-	return indexMax
-			
 	print(outputArray)
 	
 	#Mapping each index to their corresponding meaning
@@ -99,8 +97,8 @@ def feedToNetwork(inputArray,testNet):
 		outStr  = "Detected: Tat quat";
 
 	print (outStr)
-	return outStr
 
+	return indexMax
 if __name__ == "__main__":
 
 	testNet = testInit()

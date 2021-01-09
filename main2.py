@@ -8,13 +8,6 @@ import requests as req
 
 
 if __name__ == '__main__':
-
-    # Display GUI
-    # root = Tk()
-    # app = Application(master=root)
-    # app.mainloop()
-    #root.destroy()
-
     testNet = testInit()
 
     num_loop = 0
