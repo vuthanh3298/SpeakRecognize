@@ -99,8 +99,8 @@ def feedToNetwork(inputArray,testNet):
 if __name__ == "__main__":
 
 	testNet = testInit()
-	#inputArray = extractFeature("training_sets/batquat-19.wav")
-	#inputArray = extractFeature("test_files/test.wav")
-	inputArray = extractFeature("test_files/alo-dat.wav")
+	#inputArray = extractFeature("training_sets_respeaker/tatquat-1.wav")
+	inputArray = extractFeature("test_files/test.wav")
+	#inputArray = extractFeature("test_files/test-2.wav")
 	feedToNetwork(inputArray,testNet)
 
