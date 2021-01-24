@@ -8,7 +8,7 @@ import wave
 THRESHOLD = 2000
 CHUNK_SIZE = 1024
 FORMAT = pyaudio.paInt16
-RATE = 44100
+RATE = 8000
 
 def is_silent(snd_data):
     "Returns 'True' if below the 'silent' threshold"
@@ -89,7 +89,7 @@ def record():
         elif not silent and not snd_started:
             snd_started = True
 
-        if snd_started and num_silent > 30:
+        if snd_started and num_silent > 15:
             break
 
     sample_width = p.get_sample_size(FORMAT)
