@@ -4,14 +4,15 @@ from operator import add
 import scipy.io.wavfile as wav
 import numpy as np
 
-words = ['alo', 'batden', 'tatden', 'batquat', 'tatquat']
+# words = ['alo', 'batden', 'tatden', 'batquat', 'tatquat']
+words = ['alo', 'batdenbancong', 'batdennhabep', 'batdenphongkhach', 'batdenphongngu', 'batdentoilet', 'batlovisong', 'batquatphongkhach', 'batquatphongngu', 'battiviphongkhach', 'battiviphongngu', 'dongcuanhabep', 'dongcuanhavesinh', 'dongcuaphongkhach', 'dongcuaphongngu', 'mocuanhabep', 'mocuanhavesinh', 'mocuaphongkhach', 'mocuaphongngu', 'tatdenbancong', 'tatdennhabep', 'tatdenphongkhach', 'tatdenphongngu', 'tatdentoilet', 'tatlovisong', 'tatquatphongkhach', 'tatquatphongngu', 'tattiviphongkhach']
 
 
 for x in range(len(words)):
 	fileString = words[x]+"_mfcc"
 	data = []
 	for i in range(10):
-		(rate,sig) = wav.read("training_sets_respeaker/"+ words[x] + "-" + str(i+1) + ".wav")
+		(rate,sig) = wav.read("data_training/"+ words[x] + "-" + str(i+1) + ".wav")
 		print ("Reading: " + words[x] + "-" + str(i+1) + ".wav")
 		duration = len(sig)/rate
 		mfcc_feat = mfcc(sig,rate,winlen=duration/20,winstep=duration/20)
@@ -24,7 +25,7 @@ for x in range(len(words)):
 		data.append(st)
 		print(st)
 		
-	with open("mfccData/" + fileString+ ".npy", 'wb') as outfile:
+	with open("mfccData2/" + fileString+ ".npy", 'wb') as outfile:
    		np.save(outfile,data)
 
 

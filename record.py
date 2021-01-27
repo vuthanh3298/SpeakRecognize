@@ -1,11 +1,16 @@
 from sys import byteorder
 from array import array
 from struct import pack
+import noise_reduce_core as nr
+import numpy as np
+
+import scipy.io.wavfile as wav
+
 
 import pyaudio
 import wave
 
-THRESHOLD = 2000
+THRESHOLD = 2200
 CHUNK_SIZE = 1024
 FORMAT = pyaudio.paInt16
 RATE = 8000
@@ -13,6 +18,15 @@ RATE = 8000
 def is_silent(snd_data):
     "Returns 'True' if below the 'silent' threshold"
     return max(snd_data) < THRESHOLD
+
+def noise_reduce(snd_data):
+    data_numpy = np.array(snd_data)
+    reduced_noise = nr.reduce_noise(audio_clip=data_numpy.astype('float32'), noise_clip=data_numpy.astype('float32'))
+    reduced_noise = nr.reduce_noise(audio_clip=reduced_noise.astype('float32'), noise_clip=reduced_noise.astype('float32'))
+
+    wav.write("test_files/reduced-noise.wav", RATE, reduced_noise.astype("int16"))
+    return np.asarray(reduced_noise)
+
 
 def normalize(snd_data):
     "Average the volume out"
@@ -23,6 +37,25 @@ def normalize(snd_data):
     for i in snd_data:
         r.append(int(i*times))
     return r
+
+# def trim2(snd_data):
+#     def detect_leading_silence(sound, silence_threshold=-28.0, chunk_size=10):
+#         trim_ms = 0 # ms
+#         assert chunk_size > 0 # to avoid infinite loop
+#         while sound[trim_ms:trim_ms+chunk_size].dBFS < silence_threshold and trim_ms < len(sound):
+#             trim_ms += chunk_size
+
+#         return trim_ms
+
+#     start_trim = detect_leading_silence(snd_data)
+#     end_trim = detect_leading_silence(snd_data.reverse())
+
+#     duration = len(snd_data)    
+#     trimmed_sound = snd_data[start_trim:duration-end_trim]
+
+#     samples = np.array(trimmed_sound.get_array_of_samples())
+
+#     return samples
 
 def trim(snd_data):
     "Trim the blank spots at the start and end"
@@ -89,7 +122,7 @@ def record():
         elif not silent and not snd_started:
             snd_started = True
 
-        if snd_started and num_silent > 30:
+        if snd_started and num_silent > 20:
             break
 
     sample_width = p.get_sample_size(FORMAT)
@@ -97,14 +130,30 @@ def record():
     stream.close()
     p.terminate()
 
+    # noise reduce
     r = normalize(r)
+
+    r2 = noise_reduce(r)
+    r2 = trim(r2)
+
+
+
+    # r = normalize(r)
     r = trim(r)
-    return sample_width, r
+
+    
+
+    return sample_width, r, r2
+
+
+
+
 
 def record_to_file(path):
     "Records from the microphone and outputs the resulting data to 'path'"
-    sample_width, data = record()
+    sample_width, data, data2 = record()
     data = pack('<' + ('h'*len(data)), *data)
+    data2 = pack('<' + ('h'*len(data2)), *data2)
 
     wf = wave.open(path, 'wb')
     wf.setnchannels(1)
@@ -113,26 +162,12 @@ def record_to_file(path):
     wf.writeframes(data)
     wf.close()
 
-def await_first_sound():
-    print("Wait speak to record...")
-    p = pyaudio.PyAudio()
-    stream = p.open(format=FORMAT, channels=1, rate=RATE,
-    input=True,
-    frames_per_buffer=CHUNK_SIZE)
-
-    while 1:
-        # little endian, signed short
-        snd_data = array('h', stream.read(CHUNK_SIZE))
-        if byteorder == 'big':
-            snd_data.byteswap()
-
-        if max(snd_data) > 4000:
-            break;
-
-    sample_width = p.get_sample_size(FORMAT)
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
+    wf = wave.open(path+"2", 'wb')
+    wf.setnchannels(1)
+    wf.setsampwidth(sample_width)
+    wf.setframerate(RATE)
+    wf.writeframes(data2)
+    wf.close()
 
 
 if __name__ == '__main__':
